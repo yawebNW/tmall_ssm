@@ -1,108 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app>
-
-    <servlet>
-        <servlet-name>ForeServlet</servlet-name>
-        <servlet-class>tmall.servlet.ForeServlet</servlet-class>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>ForeServlet</servlet-name>
-        <url-pattern>/foreServlet</url-pattern>
-    </servlet-mapping>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring-mybatis.xml</param-value>
+    </context-param>
     
-    <servlet>
-        <servlet-name>OrderServlet</servlet-name>
-        <servlet-class>tmall.servlet.OrderServlet</servlet-class>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>OrderServlet</servlet-name>
-        <url-pattern>/orderServlet</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>UserServlet</servlet-name>
-        <servlet-class>tmall.servlet.UserServlet</servlet-class>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/userServlet</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>ProductImageServlet</servlet-name>
-        <servlet-class>tmall.servlet.ProductImageServlet</servlet-class>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>ProductImageServlet</servlet-name>
-        <url-pattern>/productImageServlet</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>CategoryServlet</servlet-name>
-        <servlet-class>tmall.servlet.CategoryServlet</servlet-class>
-    </servlet>
-
-
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
     <servlet>
-        <servlet-name>ProductServlet</servlet-name>
-        <servlet-class>tmall.servlet.ProductServlet</servlet-class>
+        <servlet-name>SpringMVC</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
     </servlet>
- 
     <servlet-mapping>
-        <servlet-name>ProductServlet</servlet-name>
-        <url-pattern>/productServlet</url-pattern>
-    </servlet-mapping>
-     
-    <servlet-mapping>
-        <servlet-name>CategoryServlet</servlet-name>
-        <url-pattern>/categoryServlet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>PropertyServlet</servlet-name>
-        <servlet-class>tmall.servlet.PropertyServlet</servlet-class>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>PropertyServlet</servlet-name>
-        <url-pattern>/propertyServlet</url-pattern>
+        <servlet-name>SpringMVC</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <filter>
-        <filter-name>EncodingFilter</filter-name>
-        <filter-class>tmall.filter.EncodingFilter</filter-class>
+        <filter-name>characterEncoding</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
     </filter>
- 
     <filter-mapping>
-        <filter-name>EncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>    
-    
-    <filter>
-        <filter-name>BackServletFilter</filter-name>
-        <filter-class>tmall.filter.BackServletFilter</filter-class>
-    </filter>
- 
-    <filter-mapping>
-        <filter-name>BackServletFilter</filter-name>
+        <filter-name>characterEncoding</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-    <filter>
-        <filter-name>ForeServletFilter</filter-name>
-        <filter-class>tmall.filter.ForeServletFilter</filter-class>
-    </filter>
- 
-    <filter-mapping>
-        <filter-name>ForeServletFilter</filter-name>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>REQUEST</dispatcher>        
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-        
 </web-app>
