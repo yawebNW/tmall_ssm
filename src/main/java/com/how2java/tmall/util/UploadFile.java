@@ -12,5 +12,5 @@ import org.springframework.web.multipart.MultipartFile;
  **/
 @Getter @Setter
 public class UploadFile {
-  private MultipartFile filepath;
+  private MultipartFile image;
 }

@@ -69,7 +69,7 @@ $(function(){
 	    			<tr>
 	    				<td>分类圖片</td>
 	    				<td>
-	    					<input id="categoryPic" accept="image/*" type="file" name="filepath" />
+	    					<input id="categoryPic" accept="image/*" type="file" name="image" />
 	    				</td>
 	    			</tr>
 	    			<tr class="submitTR">

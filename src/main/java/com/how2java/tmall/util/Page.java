@@ -2,10 +2,6 @@ package com.how2java.tmall.util;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
-
-import java.lang.annotation.Retention;
-import java.lang.ref.ReferenceQueue;
 
 /**
  * @author li

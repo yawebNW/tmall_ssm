@@ -8,14 +8,14 @@
 <script>
 $(function(){
 	$(".addFormSingle").submit(function(){
-		if(checkEmpty("filepathSingle","图片文件")){
-			$("#filepathSingle").value("");
+		if(checkEmpty("imageSingle","图片文件")){
+			$("#imageSingle").value("");
 			return true;
 		}
 		return false;
 	});
 	$(".addFormDetail").submit(function(){
-		if(checkEmpty("filepathDetail","图片文件"))
+		if(checkEmpty("imageDetail","图片文件"))
 			return true;
 		return false;
 	});
@@ -48,7 +48,7 @@ $(function(){
 					    			</tr>
 					    			<tr>
 					    				<td>
-					    					<input id="filepathSingle" type="file" name="filepath" />
+					    					<input id="imageSingle" type="file" name="image" />
 					    				</td>
 					    			</tr>
 					    			<tr class="submitTR">
@@ -101,7 +101,7 @@ $(function(){
 					    			</tr>
 					    			<tr>
 					    				<td>
-					    					<input id="filepathDetail"  type="file" name="filepath" />
+					    					<input id="imageDetail"  type="file" name="image" />
 					    				</td>
 					    			</tr>
 					    			<tr class="submitTR">
