@@ -1,31 +1,19 @@
 package com.how2java.tmall.bean;
 
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * @author li
+ */
 public class Property {
-    private Integer id;
+    @Getter @Setter private Integer id;
 
-    private Integer cid;
+    @Getter @Setter private Integer cid;
 
-    private String name;
+    @Getter private String name;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getCid() {
-        return cid;
-    }
-
-    public void setCid(Integer cid) {
-        this.cid = cid;
-    }
-
-    public String getName() {
-        return name;
-    }
+    @Getter @Setter private Category category;
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
