@@ -1,10 +1,10 @@
-package tmall.service.impl;
+package com.how2java.tmall.service.impl;
 
+import com.how2java.tmall.dao.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tmall.bean.Category;
-import tmall.dao.CategoryMapper;
-import tmall.service.CategoryService;
+import com.how2java.tmall.bean.Category;
+import com.how2java.tmall.service.CategoryService;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="tmall.dao.CategoryMapper">
+<mapper namespace="com.how2java.tmall.dao.CategoryMapper">
     <select id="get" parameterType="_int" resultType="Category">
         select * from category where id = #{id}
     </select>
@@ -15,7 +15,7 @@
         delete from category where id = #{id}
     </delete>
 
-    <insert id="add" parameterType="Category">
+    <insert id="add" parameterType="Category" useGeneratedKeys="true" keyProperty="id">
         insert into category (name) values (#{name})
     </insert>
 

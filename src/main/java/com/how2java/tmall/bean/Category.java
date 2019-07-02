@@ -1,4 +1,4 @@
-package tmall.bean;
+package com.how2java.tmall.bean;
 
 import lombok.Getter;
 import lombok.Setter;

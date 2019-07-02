@@ -1,4 +1,4 @@
-package tmall.util;
+package com.how2java.tmall.util;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +27,7 @@ public class Page {
     } else {
       last = total-total%count;
     }
-    return last = last<0?0:last;
+    return last<0?0:last;
   }
 
   public boolean isHasPreviouse() {
