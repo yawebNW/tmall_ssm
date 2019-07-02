@@ -1,5 +1,6 @@
 package com.how2java.tmall.service.impl;
 
+import com.how2java.tmall.bean.CategoryExample;
 import com.how2java.tmall.dao.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,26 +22,26 @@ public class CategoryServiceImpl implements CategoryService {
 
   @Override
   public int add(Category category) {
-    return categoryMapper.add(category);
+    return categoryMapper.insert(category);
   }
 
   @Override
   public int update(Category category) {
-    return categoryMapper.update(category);
+    return categoryMapper.updateByPrimaryKey(category);
   }
 
   @Override
   public void delete(Category category) {
-    categoryMapper.delete(category);
+    categoryMapper.deleteByPrimaryKey(category.getId());
   }
 
   @Override
   public Category get(int id) {
-    return categoryMapper.get(id);
+    return categoryMapper.selectByPrimaryKey(id);
   }
 
   @Override
   public List<Category> list() {
-    return categoryMapper.list();
+    return categoryMapper.selectByExample(new CategoryExample());
   }
 }

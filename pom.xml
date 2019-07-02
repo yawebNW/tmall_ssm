@@ -38,7 +38,6 @@
             <artifactId>mybatis-spring</artifactId>
             <version>1.2.3</version>
         </dependency>
-        <!--mybatis generator-->
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
