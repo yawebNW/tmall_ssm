@@ -69,7 +69,7 @@ public class CategoryController {
   @RequestMapping("admin_category_update")
   public String  updateCategory(Category category, UploadFile file, HttpSession session) throws IOException {
     service.update(category);
-    if (null != file.getImage()&&file.getImage().isEmpty()) {
+    if (null != file.getImage()&&(!file.getImage().isEmpty())) {
       fileProcess(category, file, session);
     }
     return "redirect:/admin_category_list";
