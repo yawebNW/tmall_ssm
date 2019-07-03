@@ -10,13 +10,13 @@
 		<span>喵，欢迎来天猫</span>
 		
 		<c:if test="${!empty user}">
-			<a href="login.jsp">${user.name}</a>
+			<a href="../WEB-INF/jsp/fore/login.jsp">${user.name}</a>
 			<a href="forelogout">退出</a>
 		</c:if>
 		
 		<c:if test="${empty user}">
-			<a href="login.jsp">请登录</a>
-			<a href="register.jsp">免费注册</a>		
+			<a href="../WEB-INF/jsp/fore/login.jsp">请登录</a>
+			<a href="../WEB-INF/jsp/fore/register.jsp">免费注册</a>
 		</c:if>
 
 

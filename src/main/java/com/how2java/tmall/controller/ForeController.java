@@ -1,7 +1,6 @@
 package com.how2java.tmall.controller;
 
 import com.how2java.tmall.bean.Category;
-import com.how2java.tmall.bean.User;
 import com.how2java.tmall.service.CategoryService;
 import com.how2java.tmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +31,6 @@ public class ForeController {
     productService.fillCategory(cs);
     model.addAttribute("cs",cs);
     model.addAttribute("contextPath", session.getServletContext());
-    return "home";
+    return "fore/home";
   }
 }

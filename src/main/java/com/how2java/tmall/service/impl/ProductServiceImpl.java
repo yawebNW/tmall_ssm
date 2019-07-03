@@ -63,12 +63,12 @@ public class ProductServiceImpl implements ProductService {
   public void fillCategory(Category category) {
     List<Product> products = list(category.getId());
     List<List<Product>> productsByRow = new ArrayList<>();
-    int rowCount = 5;
-    for (int i = 0; i < products.size(); i+=rowCount) {
-      if (i + 4 < products.size()) {
-        productsByRow.add(products.subList(i, i + 4));
+    int rowCount = 8;
+    for (int i = 0; i < products.size(); i += rowCount) {
+      if ((i + rowCount - 1) < products.size()) {
+        productsByRow.add(products.subList(i, (i + rowCount - 1)));
       } else {
-        productsByRow.add(products.subList(i, products.size()-1));
+        productsByRow.add(products.subList(i, products.size() - 1));
       }
     }
     category.setProducts(products);
