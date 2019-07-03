@@ -49,4 +49,17 @@ public class ForeController {
     userService.add(user);
     return "redirect:registerSuccessPage";
   }
+
+  @RequestMapping("forelogin")
+  public String login(User user, Model model, HttpSession session) {
+    user.setName(HtmlUtils.htmlEscape(user.getName()));
+    user = userService.get(user.getName(), user.getPassword());
+    if (null == user) {
+      model.addAttribute("msg","帐号密码错误");
+      model.addAttribute("user",null);
+      return "fore/login";
+    }
+    session.setAttribute("user", user);
+    return "redirect:forehome";
+  }
 }

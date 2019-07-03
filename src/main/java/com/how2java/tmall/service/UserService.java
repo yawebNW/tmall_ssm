@@ -17,6 +17,6 @@ public interface UserService {
   void update(User user);
   List<User> list();
   User get(int uid);
-
   boolean isExist(String name);
+  User get(String name, String password);
 }
