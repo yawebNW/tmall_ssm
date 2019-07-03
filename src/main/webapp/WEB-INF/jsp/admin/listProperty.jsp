@@ -41,7 +41,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${ps}" var="p">
+				<c:forEach items="${properties}" var="p">
 
 					<tr>
 						<td>${p.id}</td>

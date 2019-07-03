@@ -31,12 +31,12 @@ public class PropertyController {
   public String list(Integer cid, Page page,Model model) {
     PageHelper.offsetPage(page.getStart(), page.getCount());
     PageHelper.orderBy("id desc");
-    List<Property> ps = service.list(cid);
-    int total = (int) new PageInfo<>(ps).getTotal();
-    page.setTotal(total);
+    List<Property> properties = service.list(cid);
+    int total = (int) new PageInfo<>(properties).getTotal();
     page.setParam("&cid="+cid);
-    model.addAttribute("ps",ps);
+    page.setTotal(total);
     model.addAttribute("page",page);
+    model.addAttribute("properties",properties);
     model.addAttribute("c",categoryService.get(cid));
     return "admin/listProperty";
   }
