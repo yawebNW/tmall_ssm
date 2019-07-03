@@ -30,7 +30,6 @@ public class ForeController {
     List<Category> cs = categoryService.list();
     productService.fillCategory(cs);
     model.addAttribute("cs",cs);
-    model.addAttribute("contextPath", session.getServletContext());
     return "fore/home";
   }
 }

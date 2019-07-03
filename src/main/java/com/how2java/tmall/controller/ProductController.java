@@ -69,14 +69,14 @@ public class ProductController {
     return "redirect:/admin_product_list?cid="+product.getCid();
   }
 
-  @RequestMapping("admin_product_editPropertyValue")
+  @RequestMapping("admin_propertyValue_edit")
   public String editProperty(int pid, Model model) {
     Product product = productService.get(pid);
     propertyValueService.init(product);
     List<PropertyValue> pvs =propertyValueService.list(pid);
     model.addAttribute("pvs",pvs);
     model.addAttribute("p",productService.get(pid));
-    return "admin/editProductValue";
+    return "admin/editPropertyValue";
   }
 
   @ResponseBody
