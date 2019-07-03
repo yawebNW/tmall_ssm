@@ -46,7 +46,8 @@ public class CategoryController {
   @RequestMapping("admin_category_add")
   public String  addCategory(Category category, UploadFile file, HttpSession session) throws IOException {
     service.add(category);
-    fileProcess(category, file, session);
+    File folder = new File(session.getServletContext().getRealPath("img/category"));
+    ImageUtil.imageFileProcess(folder,file.getImage(),category.getId());
     return "redirect:/admin_category_list";
   }
 
@@ -70,19 +71,9 @@ public class CategoryController {
   public String  updateCategory(Category category, UploadFile file, HttpSession session) throws IOException {
     service.update(category);
     if (null != file.getImage()&&(!file.getImage().isEmpty())) {
-      fileProcess(category, file, session);
+      File folder = new File(session.getServletContext().getRealPath("img/category"));
+      ImageUtil.imageFileProcess(folder,file.getImage(),category.getId());
     }
     return "redirect:/admin_category_list";
-  }
-
-  private void fileProcess(Category category, UploadFile file, HttpSession session) throws IOException {
-    String fileName = category.getId()+".jpg";
-    File newFile = new File(session.getServletContext().getRealPath("img/category"),fileName);
-    if(!newFile.getParentFile().exists()) {
-      newFile.getParentFile().mkdirs();
-    }
-    file.getImage().transferTo(newFile);
-    BufferedImage image = ImageUtil.change2jpg(newFile);
-    ImageIO.write(image, ".jpg", newFile);
   }
 }

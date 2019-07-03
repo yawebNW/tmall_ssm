@@ -1,5 +1,7 @@
 package com.how2java.tmall.util;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.*;
@@ -14,7 +16,7 @@ import java.io.IOException;
  **/
 
 public class ImageUtil {
-  public static BufferedImage change2jpg(File f) {
+  private static BufferedImage change2jpg(File f) {
     try {
       Image i = Toolkit.getDefaultToolkit().createImage(f.getAbsolutePath());
       PixelGrabber pg = new PixelGrabber(i, 0, 0, -1, -1, true);
@@ -44,7 +46,7 @@ public class ImageUtil {
     }
   }
 
-  public static Image resizeImage(Image srcImage, int width, int height) {
+  private static Image resizeImage(Image srcImage, int width, int height) {
     try {
       BufferedImage buffImg;
       buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -54,5 +56,16 @@ public class ImageUtil {
       e.printStackTrace();
     }
     return null;
+  }
+
+  public static File imageFileProcess(File imageFolder, MultipartFile image, int id) throws IOException {
+    if (!imageFolder.getParentFile().exists()) {
+      imageFolder.getParentFile().mkdirs();
+    }
+    File file = new File(imageFolder, id + ".jpg");
+    image.transferTo(file);
+    BufferedImage bufferedImage = change2jpg(file);
+    ImageIO.write(bufferedImage, ".jpg", file);
+    return file;
   }
 }

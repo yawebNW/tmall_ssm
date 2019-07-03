@@ -4,6 +4,7 @@ import com.how2java.tmall.bean.*;
 import com.how2java.tmall.dao.CategoryMapper;
 import com.how2java.tmall.dao.ProductImageMapper;
 import com.how2java.tmall.dao.ProductMapper;
+import com.how2java.tmall.service.ProductImageService;
 import com.how2java.tmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
   @Autowired
   private ProductMapper productMapper;
   @Autowired
-  private ProductImageMapper productImageMapper;
+  private ProductImageService productImageService;
   @Autowired
   private CategoryMapper categoryMapper;
 
@@ -34,9 +35,7 @@ public class ProductServiceImpl implements ProductService {
     /*设置Category及firstProductImage属性*/
     for (Product p : ps) {
       p.setCategory(categoryMapper.selectByPrimaryKey(p.getCid()));
-      ProductImageExample imageExample = new ProductImageExample();
-      imageExample.createCriteria().andPidEqualTo(p.getId());
-      List<ProductImage> pis = productImageMapper.selectByExample(imageExample);
+      List<ProductImage> pis = productImageService.listSingle(p.getId());
       if (!pis.isEmpty()) {
         p.setFirstProductImage(pis.get(0));
       }
