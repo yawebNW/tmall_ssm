@@ -3,10 +3,11 @@
 <!-- 供购买者学习，请勿私自传播，否则自行承担相关法律责任-->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false"%>
+		 pageEncoding="UTF-8" isELIgnored="false"%>
 
-<%@include file="../include/fore/header.jsp"%>
-<%@include file="../include/fore/top.jsp"%>
-<%@include file="../include/fore/simpleSearch.jsp"%>
-<%@include file="../include/fore/registerSuccessPage.jsp"%>
-<%@include file="../include/fore/footer.jsp"%>
+
+<div class="registerSuccessDiv">
+
+	<img src="img/site/registerSuccess.png">
+	恭喜注册成功
+</div>

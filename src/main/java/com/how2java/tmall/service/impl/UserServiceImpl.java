@@ -44,4 +44,11 @@ public class UserServiceImpl implements UserService {
   public User get(int uid) {
     return userMapper.selectByPrimaryKey(uid);
   }
+
+  @Override
+  public boolean isExist(String name) {
+    UserExample userExample = new UserExample();
+    userExample.createCriteria().andNameEqualTo(name);
+    return !(userMapper.selectByExample(userExample).isEmpty());
+  }
 }

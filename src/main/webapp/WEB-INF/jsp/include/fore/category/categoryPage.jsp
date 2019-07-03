@@ -4,9 +4,12 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
+<title>模仿天猫官网-${c.name}</title>	
+<div id="category">
+	<div class="categoryPageDiv">
+		<img src="img/category/${c.id}.jpg">
+		<%@include file="sortBar.jsp"%>
+		<%@include file="productsByCategory.jsp"%>
+	</div>
 
-<%@include file="../include/fore/header.jsp"%>
-<%@include file="../include/fore/top.jsp"%>
-<%@include file="../include/fore/simpleSearch.jsp"%>
-<%@include file="../include/fore/registerSuccessPage.jsp"%>
-<%@include file="../include/fore/footer.jsp"%>
+</div>
