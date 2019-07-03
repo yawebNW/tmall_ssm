@@ -8,6 +8,7 @@ import com.how2java.tmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,6 +57,29 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public void delete(int id) {
     productMapper.deleteByPrimaryKey(id);
+  }
+
+  @Override
+  public void fillCategory(Category category) {
+    List<Product> products = list(category.getId());
+    List<List<Product>> productsByRow = new ArrayList<>();
+    int rowCount = 5;
+    for (int i = 0; i < products.size(); i+=rowCount) {
+      if (i + 4 < products.size()) {
+        productsByRow.add(products.subList(i, i + 4));
+      } else {
+        productsByRow.add(products.subList(i, products.size()-1));
+      }
+    }
+    category.setProducts(products);
+    category.setProductsByRow(productsByRow);
+  }
+
+  @Override
+  public void fillCategory(List<Category> categories) {
+    for (Category category : categories) {
+      fillCategory(category);
+    }
   }
 
   private void fill(Product p) {

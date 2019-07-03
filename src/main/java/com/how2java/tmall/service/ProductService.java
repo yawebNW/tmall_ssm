@@ -1,5 +1,6 @@
 package com.how2java.tmall.service;
 
+import com.how2java.tmall.bean.Category;
 import com.how2java.tmall.bean.Product;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface ProductService {
   void add(Product product);
   void update(Product product);
   void delete(int id);
+  void fillCategory(Category category);
+  void fillCategory(List<Category> categories);
 }

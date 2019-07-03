@@ -13,7 +13,6 @@ $(function(){
 </script>
 <c:forEach items="${cs}" var="c">
 	<div cid="${c.id}" class="productsAsideCategorys">
-	 
 		<c:forEach items="${c.productsByRow}" var="ps">
 			<div class="row show1">
 				<c:forEach items="${ps}" var="p">

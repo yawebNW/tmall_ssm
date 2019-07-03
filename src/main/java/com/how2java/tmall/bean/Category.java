@@ -1,21 +1,16 @@
 package com.how2java.tmall.bean;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
+
+@Getter
 public class Category {
-    private Integer id;
-
+    @Setter private Integer id;
     private String name;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
+    @Setter List<Product> products;
+    @Setter List<List<Product>> productsByRow;
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
