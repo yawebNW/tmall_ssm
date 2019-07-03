@@ -93,7 +93,7 @@ public class ProductImageController {
   }
 
   private void detailImageProcess(HttpSession session, MultipartFile image, int id) throws IOException {
-    File imageFolder = new File(session.getServletContext().getRealPath("img/productSingle"));
+    File imageFolder = new File(session.getServletContext().getRealPath("img/productDetail"));
     ImageUtil.imageFileProcess(imageFolder, image, id);
   }
 
