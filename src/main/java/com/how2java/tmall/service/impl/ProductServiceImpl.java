@@ -2,7 +2,6 @@ package com.how2java.tmall.service.impl;
 
 import com.how2java.tmall.bean.*;
 import com.how2java.tmall.dao.CategoryMapper;
-import com.how2java.tmall.dao.ProductImageMapper;
 import com.how2java.tmall.dao.ProductMapper;
 import com.how2java.tmall.service.ProductImageService;
 import com.how2java.tmall.service.ProductService;

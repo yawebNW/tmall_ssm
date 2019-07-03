@@ -2,7 +2,6 @@ package com.how2java.tmall.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.how2java.tmall.bean.Category;
 import com.how2java.tmall.bean.Product;
 import com.how2java.tmall.service.CategoryService;
 import com.how2java.tmall.service.ProductService;

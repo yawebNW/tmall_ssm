@@ -12,9 +12,7 @@ import com.how2java.tmall.service.CategoryService;
 import com.how2java.tmall.util.Page;
 import com.how2java.tmall.util.UploadFile;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -44,10 +42,14 @@ public class CategoryController {
   }
 
   @RequestMapping("admin_category_add")
-  public String  addCategory(Category category, UploadFile file, HttpSession session) throws IOException {
+  public String  addCategory(Category category, UploadFile file, HttpSession session) {
     service.add(category);
     File folder = new File(session.getServletContext().getRealPath("img/category"));
-    ImageUtil.imageFileProcess(folder,file.getImage(),category.getId());
+    try {
+      ImageUtil.imageFileProcess(folder,file.getImage(),category.getId());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     return "redirect:/admin_category_list";
   }
 

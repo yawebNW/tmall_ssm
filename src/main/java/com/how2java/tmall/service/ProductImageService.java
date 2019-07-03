@@ -1,6 +1,5 @@
 package com.how2java.tmall.service;
 
-import com.how2java.tmall.bean.Product;
 import com.how2java.tmall.bean.ProductImage;
 
 import java.util.List;
