@@ -3,13 +3,16 @@ package com.how2java.tmall.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.how2java.tmall.bean.Product;
+import com.how2java.tmall.bean.PropertyValue;
 import com.how2java.tmall.service.CategoryService;
 import com.how2java.tmall.service.ProductService;
+import com.how2java.tmall.service.PropertyValueService;
 import com.how2java.tmall.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -26,6 +29,8 @@ public class ProductController {
   private ProductService productService;
   @Autowired
   private CategoryService categoryService;
+  @Autowired
+  private PropertyValueService propertyValueService;
 
   @RequestMapping("admin_product_list")
   public String list(Integer cid, Page page, Model model) {
@@ -62,6 +67,23 @@ public class ProductController {
     product = productService.get(product.getId());
     productService.delete(product.getId());
     return "redirect:/admin_product_list?cid="+product.getCid();
+  }
+
+  @RequestMapping("admin_product_editPropertyValue")
+  public String editProperty(int pid, Model model) {
+    Product product = productService.get(pid);
+    propertyValueService.init(product);
+    List<PropertyValue> pvs =propertyValueService.list(pid);
+    model.addAttribute("pvs",pvs);
+    model.addAttribute("p",productService.get(pid));
+    return "admin/editProductValue";
+  }
+
+  @ResponseBody
+  @RequestMapping("admin_product_updatePropertyValue")
+  public String updatePropertyValue(PropertyValue propertyValue) {
+    propertyValueService.update(propertyValue);
+    return "success";
   }
 
 }

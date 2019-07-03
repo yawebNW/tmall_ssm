@@ -10,7 +10,7 @@
 
 <script>
 $(function() {
-	$("input.pvValue").keyup(function(){
+	$("input.pvValue").blur(function(){
 		var value = $(this).val();
 		var page = "admin_product_updatePropertyValue";
 		var pvid = $(this).attr("pvid");
@@ -18,9 +18,9 @@ $(function() {
 		parentSpan.css("border","1px solid yellow");
 		$.post(
 			    page,
-			    {"value":value,"pvid":pvid},
+			    {"value":value,"id":pvid},
 			    function(result){
-			    	if("success"==result)
+			    	if("success"===result)
 						parentSpan.css("border","1px solid green");
 			    	else
 			    		parentSpan.css("border","1px solid red");
