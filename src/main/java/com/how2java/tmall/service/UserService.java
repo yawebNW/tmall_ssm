@@ -12,5 +12,9 @@ import java.util.List;
  **/
 
 public interface UserService {
+  void delete(int id);
+  void add(User user);
+  void update(User user);
   List<User> list();
+  User get(int uid);
 }

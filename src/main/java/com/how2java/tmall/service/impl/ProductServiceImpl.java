@@ -31,21 +31,14 @@ public class ProductServiceImpl implements ProductService {
     ProductExample example = new ProductExample();
     example.createCriteria().andCidEqualTo(cid);
     List<Product> ps = productMapper.selectByExample(example);
-    /*设置Category及firstProductImage属性*/
-    for (Product p : ps) {
-      p.setCategory(categoryMapper.selectByPrimaryKey(p.getCid()));
-      List<ProductImage> pis = productImageService.listSingle(p.getId());
-      if (!pis.isEmpty()) {
-        p.setFirstProductImage(pis.get(0));
-      }
-    }
+    fill(ps);
     return ps;
   }
 
   @Override
   public Product get(int id) {
     Product product = productMapper.selectByPrimaryKey(id);
-    product.setCategory(categoryMapper.selectByPrimaryKey(product.getCid()));
+    fill(product);
     return product;
   }
 
@@ -63,5 +56,19 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public void delete(int id) {
     productMapper.deleteByPrimaryKey(id);
+  }
+
+  private void fill(Product p) {
+    p.setCategory(categoryMapper.selectByPrimaryKey(p.getCid()));
+    List<ProductImage> pis = productImageService.listSingle(p.getId());
+    if (!pis.isEmpty()) {
+      p.setFirstProductImage(pis.get(0));
+    }
+  }
+
+  private void fill(List<Product> products) {
+    for (Product product : products) {
+      fill(product);
+    }
   }
 }

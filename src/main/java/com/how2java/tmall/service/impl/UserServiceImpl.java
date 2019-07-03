@@ -19,8 +19,29 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
   @Autowired
   private UserMapper userMapper;
+
+  @Override
+  public void delete(int id) {
+    userMapper.deleteByPrimaryKey(id);
+  }
+
+  @Override
+  public void add(User user) {
+    userMapper.insert(user);
+  }
+
+  @Override
+  public void update(User user) {
+    userMapper.updateByPrimaryKeySelective(user);
+  }
+
   @Override
   public List<User> list() {
     return userMapper.selectByExample(new UserExample());
+  }
+
+  @Override
+  public User get(int uid) {
+    return userMapper.selectByPrimaryKey(uid);
   }
 }
