@@ -18,4 +18,5 @@ public interface OrderItemService {
   void update(OrderItem order);
   OrderItem get(int id);
   List<OrderItem> list(int oid);
+  int getSaleCount(int pid);
 }

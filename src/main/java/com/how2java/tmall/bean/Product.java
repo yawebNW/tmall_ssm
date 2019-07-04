@@ -15,10 +15,12 @@ public class Product {
   @Getter @Setter private Integer stock;
   @Getter @Setter private Integer cid;
   @Getter @Setter private Date createDate;
-  @Getter @Setter private Category category;
+  @Getter private Category category;
   @Getter @Setter private ProductImage firstProductImage;
-  @Getter @Setter private List<ProductImage> simpleImage;
-  @Getter @Setter private List<ProductImage> detailImage;
+  @Getter @Setter private List<ProductImage> productSingleImages;
+  @Getter @Setter private List<ProductImage> productDetailImages;
+  @Getter @Setter private int saleCount;
+  @Getter @Setter private int reviewCount;
 
   public void setName(String name) {
     this.name = name == null ? null : name.trim();
@@ -26,5 +28,9 @@ public class Product {
 
   public void setSubTitle(String subTitle) {
     this.subTitle = subTitle == null ? null : subTitle.trim();
+  }
+
+  public void setCategory(Category category) {
+    this.category = category;
   }
 }

@@ -20,4 +20,5 @@ public interface ProductService {
   void delete(int id);
   void fillCategory(Category category);
   void fillCategory(List<Category> categories);
+  void setImages(Product product);
 }

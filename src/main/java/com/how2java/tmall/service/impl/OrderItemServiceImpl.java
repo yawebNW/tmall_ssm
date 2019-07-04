@@ -41,7 +41,7 @@ public class OrderItemServiceImpl implements OrderItemService {
   @Override
   public OrderItem get(int id) {
     OrderItem orderItem = orderItemMapper.selectByPrimaryKey(id);
-    orderItem.setProduct(productService.get(orderItem.getPid()));
+    setProduct(orderItem);
     return orderItem;
   }
 
@@ -50,9 +50,29 @@ public class OrderItemServiceImpl implements OrderItemService {
     OrderItemExample orderItemExample = new OrderItemExample();
     orderItemExample.createCriteria().andOidEqualTo(oid);
     List<OrderItem> orderItems = orderItemMapper.selectByExample(orderItemExample);
-    for (OrderItem orderItem : orderItems) {
-      orderItem.setProduct(productService.get(orderItem.getPid()));
-    }
+    setProduct(orderItems);
     return orderItems;
+  }
+
+  @Override
+  public int getSaleCount(int pid) {
+    OrderItemExample orderItemExample = new OrderItemExample();
+    orderItemExample.createCriteria().andPidEqualTo(pid);
+    List<OrderItem> orderItems = orderItemMapper.selectByExample(orderItemExample);
+    int saleCount = 0;
+    for (OrderItem orderItem : orderItems) {
+      saleCount+=orderItem.getNumber();
+    }
+    return saleCount;
+  }
+
+  private void setProduct(OrderItem orderItem) {
+    orderItem.setProduct(productService.get(orderItem.getPid()));
+  }
+
+  private void setProduct(List<OrderItem> orderItems) {
+    for (OrderItem orderItem : orderItems) {
+      setProduct(orderItem);
+    }
   }
 }

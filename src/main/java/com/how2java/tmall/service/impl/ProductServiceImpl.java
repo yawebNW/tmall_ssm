@@ -32,14 +32,14 @@ public class ProductServiceImpl implements ProductService {
     ProductExample example = new ProductExample();
     example.createCriteria().andCidEqualTo(cid);
     List<Product> ps = productMapper.selectByExample(example);
-    fill(ps);
+    setCategoryAndFirstProductImage(ps);
     return ps;
   }
 
   @Override
   public Product get(int id) {
     Product product = productMapper.selectByPrimaryKey(id);
-    fill(product);
+    setCategoryAndFirstProductImage(product);
     return product;
   }
 
@@ -82,7 +82,15 @@ public class ProductServiceImpl implements ProductService {
     }
   }
 
-  private void fill(Product p) {
+  @Override
+  public void setImages(Product product) {
+    List<ProductImage> psis = productImageService.listSingle(product.getId());
+    List<ProductImage> pdis = productImageService.listDetail(product.getId());
+    product.setProductSingleImages(psis);
+    product.setProductDetailImages(pdis);
+  }
+
+  private void setCategoryAndFirstProductImage(Product p) {
     p.setCategory(categoryMapper.selectByPrimaryKey(p.getCid()));
     List<ProductImage> pis = productImageService.listSingle(p.getId());
     if (!pis.isEmpty()) {
@@ -90,9 +98,10 @@ public class ProductServiceImpl implements ProductService {
     }
   }
 
-  private void fill(List<Product> products) {
+  private void setCategoryAndFirstProductImage(List<Product> products) {
     for (Product product : products) {
-      fill(product);
+      setCategoryAndFirstProductImage(product);
     }
   }
+
 }

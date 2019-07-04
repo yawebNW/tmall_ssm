@@ -24,11 +24,7 @@ public class PropertyValueServiceImpl implements PropertyValueService {
   @Autowired
   private PropertyValueMapper propertyValueMapper;
   @Autowired
-  private PropertyMapper propertyMapper;
-  @Autowired
   private PropertyService propertyService;
-  @Autowired
-  private ProductMapper productMapper;
   @Override
   public List<PropertyValue> list(int pid) {
     PropertyValueExample propertyValueExample = new PropertyValueExample();
