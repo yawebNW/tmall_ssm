@@ -2,9 +2,10 @@ package com.how2java.tmall.bean;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Date;
-@Getter
+@Getter @ToString
 public class Review {
     @Setter private Integer id;
     private String content;

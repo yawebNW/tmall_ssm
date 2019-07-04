@@ -117,7 +117,7 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  public void setSaleAndReviewcount(Product product) {
+  public void setSaleAndReviewCount(Product product) {
     product.setSaleCount(orderItemService.getSaleCount(product.getId()));
     product.setReviewCount(reviewService.getReviewCount(product.getId()));
   }

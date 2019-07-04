@@ -3,13 +3,14 @@ package com.how2java.tmall.service.impl;
 import com.how2java.tmall.bean.Order;
 import com.how2java.tmall.bean.OrderExample;
 import com.how2java.tmall.bean.OrderItem;
-import com.how2java.tmall.bean.User;
 import com.how2java.tmall.dao.OrderMapper;
 import com.how2java.tmall.service.OrderItemService;
 import com.how2java.tmall.service.OrderService;
 import com.how2java.tmall.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,6 +28,20 @@ public class OrderServiceImpl implements OrderService {
   private OrderItemService orderItemService;
   @Autowired
   private UserService userService;
+
+  @Override
+  @Transactional(propagation = Propagation.REQUIRED, rollbackForClassName ="Exception" )
+  public float add(Order order, List<OrderItem> ois) {
+    float total=0;
+    add(order);
+    for (OrderItem orderItem : ois) {
+      orderItem.setOid(order.getId());
+      total+=orderItem.getNumber()*orderItem.getProduct().getPromotePrice();
+      orderItemService.update(orderItem);
+    }
+    return total;
+  }
+
   @Override
   public void add(Order order) {
     orderMapper.insert(order);
@@ -54,6 +69,15 @@ public class OrderServiceImpl implements OrderService {
   public List<Order> list() {
     List<Order> orders = orderMapper.selectByExample(new OrderExample());
     fill(orders);
+    return orders;
+  }
+
+  @Override
+  public List<Order> listByUser(int uid, String excludedStatus) {
+    OrderExample orderExample = new OrderExample();
+    orderExample.createCriteria().andUidEqualTo(uid).andStatusNotEqualTo(excludedStatus);
+    orderExample.setOrderByClause("id desc");
+    List<Order> orders = orderMapper.selectByExample(orderExample);
     return orders;
   }
 

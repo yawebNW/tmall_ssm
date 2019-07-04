@@ -88,6 +88,27 @@ public class OrderItemServiceImpl implements OrderItemService {
     return orderItems.get(0);
   }
 
+  @Override
+  public void fillOrder(Order order) {
+    List<OrderItem> orderItems = list(order.getId());
+    float total = 0;
+    int totalNumber = 0;
+    for (OrderItem orderItem : orderItems) {
+      total+=orderItem.getNumber()*orderItem.getProduct().getPromotePrice();
+      totalNumber+=orderItem.getNumber();
+    }
+    order.setOrderItems(orderItems);
+    order.setTotalNumber(totalNumber);
+    order.setTotal(total);
+  }
+
+  @Override
+  public void fillOrder(List<Order> orders) {
+    for (Order order : orders) {
+      fillOrder(order);
+    }
+  }
+
   private void setProduct(OrderItem orderItem) {
     orderItem.setProduct(productService.get(orderItem.getPid()));
   }

@@ -25,7 +25,6 @@ public class ReviewServiceImpl implements ReviewService {
   private UserService userService;
   @Override
   public void add(Review review) {
-    review.setCreateDate(new Date());
     reviewMapper.insert(review);
   }
 

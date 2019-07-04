@@ -3,11 +3,12 @@ package com.how2java.tmall.bean;
 import com.how2java.tmall.service.OrderService;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Date;
 import java.util.List;
 
-@Getter
+@Getter @ToString
 public class Order {
     @Setter private Integer id;
     private String orderCode;
