@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -107,5 +109,40 @@ public class ForeController {
     }
     session.setAttribute("user", user);
     return "success";
+  }
+
+  @RequestMapping("forecategory")
+  public String category(int cid, String sort, Model model) {
+    Category category = categoryService.get(cid);
+    productService.fillCategory(category);
+    List<Product> products = category.getProducts();
+    for (Product product : products) {
+      product.setSaleCount(orderItemService.getSaleCount(product.getId()));
+      product.setReviewCount(reviewService.getReviewCount(product.getId()));
+    }
+    if (null != sort) {
+      switch (sort) {
+        case "review":
+          products.sort(Comparator.comparingInt(Product::getReviewCount).reversed());
+          break;
+        case "date":
+          products.sort(Comparator.comparing(Product::getCreateDate).reversed());
+          break;
+        case "saleCount":
+          products.sort(Comparator.comparing(Product::getSaleCount).reversed());
+          break;
+        case "price":
+          products.sort(Comparator.comparing(Product::getPromotePrice));
+          break;
+        case "all":
+          products.sort((p1,p2)->(p2.getReviewCount()*p2.getSaleCount()-p1.getReviewCount()*p1.getSaleCount()));
+          break;
+        default:
+          break;
+      }
+    }
+    category.setProducts(products);
+    model.addAttribute("c",category);
+    return "fore/category";
   }
 }

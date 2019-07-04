@@ -56,6 +56,11 @@ public class ReviewServiceImpl implements ReviewService {
     return reviews;
   }
 
+  @Override
+  public int getReviewCount(int pid) {
+    return list(pid).size();
+  }
+
   private void setUser(Review review) {
     review.setUser(userService.get(review.getUid()));
   }
@@ -65,4 +70,5 @@ public class ReviewServiceImpl implements ReviewService {
       setUser(review);
     }
   }
+
 }

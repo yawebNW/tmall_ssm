@@ -17,4 +17,5 @@ public interface ReviewService {
   void delete(int id);
   Review get(int id);
   List<Review> list(int pid);
+  int getReviewCount(int pid);
 }
