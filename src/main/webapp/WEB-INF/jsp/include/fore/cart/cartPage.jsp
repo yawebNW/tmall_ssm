@@ -29,8 +29,9 @@ $(function(){
 				    page,
 				    {"oiid":deleteOrderItemid},
 				    function(result){
-						if("success"==result){
+						if("success"===result){
 							$("tr.cartProductItemTR[oiid="+deleteOrderItemid+"]").hide();
+							location.reload(true);
 						}
 						else{
 							location.href="loginPage";

@@ -211,4 +211,21 @@ public class ForeController {
     model.addAttribute("ois",orderItems);
     return "fore/cart";
   }
+
+  @ResponseBody
+  @RequestMapping("foredeleteOrderItem")
+  public String deleteOrderItem(int oiid) {
+    orderItemService.delete(oiid);
+    return "success";
+  }
+
+  @ResponseBody
+  @RequestMapping("forechangeOrderItem")
+  public String changeOrderItem(int pid, int number, HttpSession session) {
+    User user = (User) session.getAttribute("user");
+    OrderItem orderItem = orderItemService.getByProductAndUser(pid,user.getId() );
+    orderItem.setNumber(number);
+    orderItemService.update(orderItem);
+    return "success";
+  }
 }

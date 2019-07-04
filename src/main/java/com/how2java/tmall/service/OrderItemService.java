@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface OrderItemService {
   void add(OrderItem order);
-  void delete(OrderItem order);
+  void delete(int id);
   void update(OrderItem order);
   OrderItem get(int id);
   List<OrderItem> list(int oid);
