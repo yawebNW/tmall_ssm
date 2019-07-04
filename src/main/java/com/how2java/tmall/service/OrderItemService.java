@@ -19,4 +19,6 @@ public interface OrderItemService {
   OrderItem get(int id);
   List<OrderItem> list(int oid);
   int getSaleCount(int pid);
+  List<OrderItem> listByUser(int uid);
+  OrderItem getByProductAndUser(int pid, int uid);
 }

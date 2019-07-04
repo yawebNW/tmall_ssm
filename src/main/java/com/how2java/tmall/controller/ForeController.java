@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -152,5 +153,36 @@ public class ForeController {
     List<Product> products = productService.search(keyword);
     model.addAttribute("ps",products);
     return "fore/searchResult";
+  }
+
+  @RequestMapping("forebuyone")
+  public String buyOne(int num, int pid, Model model, HttpSession session) {
+    User user = (User) session.getAttribute("user");
+    OrderItem orderItem = orderItemService.getByProductAndUser(pid, user.getId());
+    if (orderItem == null) {
+      orderItem = new OrderItem();
+      orderItem.setNumber(num);
+      orderItem.setPid(pid);
+      orderItem.setUid(user.getId());
+      orderItemService.add(orderItem);
+    } else {
+      orderItem.setNumber(orderItem.getNumber()+num);
+      orderItemService.update(orderItem);
+    }
+    return "redirect:forebuy?oiid="+orderItem.getId();
+  }
+
+  @RequestMapping("forebuy")
+  public String buy(String[] oiid, Model model, HttpSession session) {
+    List<OrderItem> orderItems = new ArrayList<>();
+    float total = 0;
+    for (String oi : oiid) {
+      OrderItem  orderItem = orderItemService.get(Integer.parseInt(oi));
+      total+=orderItem.getNumber()*orderItem.getProduct().getPromotePrice();
+      orderItems.add(orderItem);
+    }
+    session.setAttribute("ois",orderItems);
+    model.addAttribute("total",total);
+    return "fore/buy";
   }
 }
