@@ -3,8 +3,10 @@ package com.how2java.tmall.service.impl;
 import com.how2java.tmall.bean.*;
 import com.how2java.tmall.dao.CategoryMapper;
 import com.how2java.tmall.dao.ProductMapper;
+import com.how2java.tmall.service.OrderItemService;
 import com.how2java.tmall.service.ProductImageService;
 import com.how2java.tmall.service.ProductService;
+import com.how2java.tmall.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,10 @@ public class ProductServiceImpl implements ProductService {
   private ProductImageService productImageService;
   @Autowired
   private CategoryMapper categoryMapper;
+  @Autowired
+  private ReviewService reviewService;
+  @Autowired
+  private OrderItemService orderItemService;
 
   @Override
   public List<Product> list(int cid) {
@@ -89,6 +95,31 @@ public class ProductServiceImpl implements ProductService {
     List<ProductImage> pdis = productImageService.listDetail(product.getId());
     product.setProductSingleImages(psis);
     product.setProductDetailImages(pdis);
+  }
+
+  @Override
+  public List<Product> search(String keyword) {
+    keyword = "%"+keyword+"%";
+    ProductExample productExample = new ProductExample();
+    productExample.createCriteria().andNameLike(keyword);
+    productExample.setOrderByClause("id desc");
+    List<Product> products = productMapper.selectByExample(productExample);
+    setCategoryAndFirstProductImage(products);
+    setSaleAndReviewCount(products);
+    return products;
+  }
+
+  @Override
+  public void setSaleAndReviewCount(List<Product> products) {
+    for (Product product : products) {
+      setCategoryAndFirstProductImage(product);
+    }
+  }
+
+  @Override
+  public void setSaleAndReviewcount(Product product) {
+    product.setSaleCount(orderItemService.getSaleCount(product.getId()));
+    product.setReviewCount(reviewService.getReviewCount(product.getId()));
   }
 
   private void setCategoryAndFirstProductImage(Product p) {

@@ -21,4 +21,7 @@ public interface ProductService {
   void fillCategory(Category category);
   void fillCategory(List<Category> categories);
   void setImages(Product product);
+  List<Product> search(String keyword);
+  void setSaleAndReviewCount(List<Product> products);
+  void setSaleAndReviewcount(Product product);
 }
